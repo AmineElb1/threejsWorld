@@ -1,4 +1,6 @@
+import './style.css'
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
 
@@ -12,6 +14,11 @@ camera.position.set(0, 5, 20);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+// Orbit Controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
 
 
 
@@ -40,7 +47,7 @@ ground.position.y = 0; // Plaats het grondvlak op hoogte 0
 scene.add(ground);
 
 // Name Card
-const nameTexture = new THREE.TextureLoader().load('images/Amine.png');
+const nameTexture = new THREE.TextureLoader().load('../images/Amine.png');
 const cardGeometry = new THREE.PlaneGeometry(2, 1);
 const cardMaterial = new THREE.MeshBasicMaterial({ map: nameTexture });
 const nameCard = new THREE.Mesh(cardGeometry, cardMaterial);
@@ -85,7 +92,7 @@ for (let i = 0; i < 5; i++) {
 // Light Source
 const ambientLight = new THREE.AmbientLight(0x404040, 1.5); // Soft white light
 scene.add(ambientLight);
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
 directionalLight.position.set(10, 10, 10).normalize();
 scene.add(directionalLight);
 
